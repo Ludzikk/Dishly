@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-header: "Merienda", sans-serif;
+    --font-main: "Open Sans", sans-serif;
+    
+	--color-textColorDark: #f5f1ef;
+	--color-textColorLight: #100c0a;
+    --color-mainBgDark: #18110c;
+    --color-mainBgLight: #f3ece7;
+    --color-primaryDark: #d5ae95;
+    --color-primaryLight: #6a432a;
+    --color-secondaryDark: #784423;
+    --color-secondaryLight: #dda988;
+    --color-accentDark: #d87d44;
+    --color-accentLight: #b95f27;
+}
+
+.aboutusbg {
+    background-image: url("../public/burgeraboutus.png");
+    background-position-y: center;
+    background-position-x: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
