@@ -1,28 +1,34 @@
 import { useContext } from "react";
 import { FaMoon } from "react-icons/fa";
-import { ThemeContext } from "../../App";
+import { GlobalContext } from "../../App";
+
+import { Link } from "react-router-dom";
 
 export default function NavContainer() {
-	const changeTheme = useContext(ThemeContext);
+	const { changeTheme } = useContext(GlobalContext);
 
 	return (
 		<div className="p-2 py-4 relative flex justify-between items-center">
-			<p className="font-bold text-center text-lg lg:text-xl 2xl:text-2xl">
+			<Link
+				to="."
+				className="font-bold text-center text-lg lg:text-xl 2xl:text-2xl">
 				Dishly
-			</p>
+			</Link>
 			<ul className="flex items-center justify-center gap-8 font-bold">
 				<li>
-					<a href="#" className="hover:opacity-70 duration-300">
+					<Link href="." className="hover:opacity-70 duration-300">
 						About
-					</a>
+					</Link>
 				</li>
 				<li>
-					<a href="#" className="hover:opacity-70 duration-300">
+					<Link href="." className="hover:opacity-70 duration-300">
 						Recipes
-					</a>
+					</Link>
 				</li>
 			</ul>
-			<button onClick={changeTheme} aria-label="Change dark/light theme of website">
+			<button
+				onClick={changeTheme}
+				aria-label="Change dark/light theme of website">
 				<FaMoon className="cursor-pointer hover:opacity-70 duration-300" />
 			</button>
 		</div>

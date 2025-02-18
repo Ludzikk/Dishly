@@ -3,9 +3,9 @@ export default function Footer() {
 
 	return (
 		<footer className="p-2 py-4 bg-secondaryDark text-textColorDark dark:bg-secondaryLight dark:text-textColorLight">
-			<div className="max-w-[1200px] w-full mx-auto flex items-center justify-center gap-8">
+			<div className="max-w-[1200px] w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
 				<span>© Copyright {currentYear} Dishly</span>
-				<ul className="font-bold flex gap-8">
+				<ul className="font-bold flex flex-col lg:flex-row gap-2 lg:gap-4 text-center">
 					<li>
 						<a href="#">About</a>
 					</li>
@@ -13,7 +13,7 @@ export default function Footer() {
 						<a href="#">Recipes</a>
 					</li>
 				</ul>
-				<span>Api used: </span>
+				<span>Api used: <a href="https://www.themealdb.com/api.php" className="underline">TheMealDB</a></span>
 			</div>
 		</footer>
 	);

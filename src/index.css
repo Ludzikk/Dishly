@@ -19,9 +19,35 @@
 }
 
 .aboutusbg {
-    background-image: url("../public/burgeraboutus.png");
+    background-image: url("/burgeraboutus.png");
     background-position-y: center;
     background-position-x: center;
     background-size: 70%;
     background-repeat: no-repeat;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.page-item {
+    padding: 0 12px;
+}
+
+.active-pagination {
+    color: var(--color-accentDark);
+}
+
+.button-pagination, .page-item {
+    cursor: pointer;
+}
+
+.next-pagination {
+    margin-left: auto;
+}
+
+.previous-pagination {
+    margin-right: auto;
 }

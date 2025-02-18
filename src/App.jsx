@@ -1,20 +1,19 @@
 import { useEffect, useState, createContext } from "react";
-import HeaderCarousel from "./components/header/HeaderCarousel";
-import Nav from "./components/nav/Nav";
-import NavContainer from "./components/nav/NavContainer";
-import Main from "./components/main/Main";
-import MainSection from "./components/main/MainSection";
-import AboutUs from "./components/main/mainSections/aboutsUs/AboutUs";
-import Footer from "./components/footer/Footer";
-import Recipes from "./components/main/mainSections/recipes/Recipes";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const ThemeContext = createContext();
-const RecipesContext = createContext();
+import Layout from "./components/Layout";
+import HomePage from "./components/pages/HomePage";
+import RecipePage from "./components/pages/RecipePage";
+
+const GlobalContext = createContext();
 
 export default function App() {
-	const [recipes, setRecipes] = useState([]);
-	const [letter, setLetter] = useState("a");
 	const [theme, setTheme] = useState("dark");
+	const [recipes, setRecipes] = useState({ meals: [] });
+	const [letter, setLetter] = useState("a");
+	const [page, setPage] = useState(0);
+
+	const itemsOnPage = 8;
 
 	function changeTheme() {
 		setTheme((prevVal) => (prevVal === "dark" ? "light" : "dark"));
@@ -30,6 +29,8 @@ export default function App() {
 			.then((req) => req.json())
 			.then((data) => setRecipes(data))
 			.catch((error) => console.log("Error fetching recipes data: ", error));
+
+		setPage(0);
 	}, [letter]);
 
 	useEffect(() => {
@@ -38,26 +39,25 @@ export default function App() {
 	}, [theme]);
 
 	return (
-		<>
-			<ThemeContext.Provider value={changeTheme}>
-				<Nav>
-					<NavContainer />
-				</Nav>
-			</ThemeContext.Provider>
-			<HeaderCarousel />
-			<Main>
-				<MainSection>
-					<AboutUs />
-				</MainSection>
-				<MainSection>
-					<RecipesContext.Provider value={{ recipes, changeLetter }}>
-						<Recipes />
-					</RecipesContext.Provider>
-				</MainSection>
-			</Main>
-			<Footer />
-		</>
+		<GlobalContext.Provider
+			value={{
+				changeTheme,
+				changeLetter,
+				recipes,
+				itemsOnPage,
+				page,
+				setPage,
+			}}>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/dishly" element={<Layout />}>
+						<Route index element={<HomePage />} />
+						<Route path="recipe/:id" element={<RecipePage />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</GlobalContext.Provider>
 	);
 }
 
-export { ThemeContext, RecipesContext };
+export { GlobalContext };
